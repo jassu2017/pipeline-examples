@@ -1,5 +1,5 @@
 node {
-    stage('Checkout external proj') {
+    stage('Checkout external proj') 
      
     checkout scm
             
