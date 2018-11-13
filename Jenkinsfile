@@ -7,6 +7,7 @@ node {
             
             sh "ls -lat"
             }
+    }
             
     stage "Create build output"
     
