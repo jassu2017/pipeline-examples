@@ -1,24 +1,39 @@
-node {
-    stage('Checkout external proj') 
-     
-    checkout scm
-            
-    stage "Create build output"
+node('master')
+{
+   def mvnHome
+   stage('CHeckOut') { // for display purposes
+      // Get some code from a GitHub repository
+      git 'https://github.com/jassu2017/Java-Mysql-Simple-Login-Web-application.git'
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.           
+      mvnHome = tool 'Jenkins_Maven'
+   }
+   
+  stage('Sonarqube analysis') {
+		withSonarQubeEnv('Sonarqube') {
+		bat(/"${mvnHome}\bin\mvn" sonar:sonar \
+		          -Dsonar.login=a5c92ac4c180b534f4556f7c576ebed54c8758b8/)
+		}
+		}
+		
+	stage('Quality Gate'){
+	    timeout(time: 5, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
+	    sleep(10)
+    def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+    if (qg.status != 'OK') {
+      error "Pipeline aborted due to quality gate failure: ${qg.status}"
+    }
+  }
+	}
+   stage('Build') {
+      // Run the maven build
+      if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+      } else {
+         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+      }
+   }
+
     
-    // Make the output directory.
-    sh "mkdir -p output"
-
-    // Make the input directory.
-    sh "mkdir -p new_input"
-
-    // Write an useful file, which is needed to be archived.
-    writeFile file: "output/usefulfile.txt", text: "This file is useful, need to archive it."
-
-    // Write an useless file, which is not needed to be archived.
-    writeFile file: "output/uselessfile.md", text: "This file is useless, no need to archive it."
-
-    stage "Archive build output"
-    
-    // Archive the build output artifacts.
-    archiveArtifacts artifacts: 'output/*.txt', excludes: 'output/*.md'
 }
