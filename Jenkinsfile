@@ -35,7 +35,7 @@ node('master')
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
 	   stage ('send email') {
-		   //some code
+		   echo 'Mail sending'
 	   }
    
 
