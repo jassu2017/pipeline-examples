@@ -13,6 +13,7 @@ node('master')
    }
    echo 'checkout completed'
    echo '-------------------------------------------------------------'
+	   echo 'change in jenkinsfile'
 	   
    
    stage('Sonarqube analysis') {
