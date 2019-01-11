@@ -33,6 +33,7 @@ node('master')
   }
 	}
 	echo 'Quality Gate Sucessfull'
+	   echo '------------------------------------------------------------'
 	
 	stage('Build') {
       // Run the maven build
