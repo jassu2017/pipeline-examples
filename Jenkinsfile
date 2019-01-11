@@ -45,7 +45,7 @@ node('master')
    }
    echo 'Build Done'
 	   echo '------------------------------------------------------------'
-   
+           echo '*************************************************************' 
    	stage('Upload Archive to Artifactory ')
  {
   // Get Artifactory server instance, defined in the Artifactory Plugin
