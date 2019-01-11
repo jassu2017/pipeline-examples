@@ -13,7 +13,7 @@ node('master')
    }
    echo 'checkout completed'
    echo '-------------------------------------------------------'
-	   echo 'Moving to next stage'
+	   
    
    stage('Sonarqube analysis') {
 		withSonarQubeEnv('Sonarqube') {
