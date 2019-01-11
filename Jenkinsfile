@@ -12,7 +12,7 @@ node('master')
       mvnHome = tool 'Jenkins_Maven'
    }
    echo 'checkout completed'
-   echo '--------------------------------------'
+   echo '-------------------------------------------------------------'
 	   
    
    stage('Sonarqube analysis') {
