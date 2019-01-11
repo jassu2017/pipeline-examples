@@ -21,6 +21,7 @@ node('master')
 		}
 		}
 	echo 'Sonarqube Analysis Done'
+	   echo '------------------------------------------------------------'
 	
 	stage('Quality Gate'){
 	    timeout(time: 5, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
