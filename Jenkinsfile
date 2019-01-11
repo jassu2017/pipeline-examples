@@ -5,7 +5,9 @@ node('master')
    notifyStarted()
    stage('CHeckOut') { // for display purposes
       // Get some code from a GitHub repository
-      git 'https://github.com/jassu2017/Java-Mysql-Simple-Login-Web-application.git'
+     // git 'https://github.com/jassu2017/Java-Mysql-Simple-Login-Web-application.git
+	   checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '2ffe4aa7-71d0-4d5f-9627-9f18705889b3', url: 'https://github.com/jassu2017/pipeline-examples.git']]]
+	   
       // Get the Maven tool.
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
