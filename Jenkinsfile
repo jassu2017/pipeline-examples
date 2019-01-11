@@ -44,6 +44,7 @@ node('master')
       }
    }
    echo 'Build Done'
+	   echo '------------------------------------------------------------'
    
    	stage('Upload Archive to Artifactory ')
  {
