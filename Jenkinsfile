@@ -70,7 +70,7 @@ node('master')
 	 
 }
     echo 'Artifacts archived to Artifactory'
-    
+     echo '------------------------------------------------------------'
     stage ('Deploy')
      {
     build 'Deploy_to_QA'
